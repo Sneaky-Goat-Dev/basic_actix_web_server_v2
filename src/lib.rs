@@ -1,9 +1,10 @@
 use std::io::Error;
 
-use actix_web::{middleware::Logger, App, HttpServer};
+use actix_web::{middleware::Logger, web, App, HttpServer};
 use dotenv::dotenv;
 
 mod config;
+mod db;
 mod handlers;
 mod routes;
 
@@ -15,8 +16,13 @@ pub async fn run() -> Result<(), Error> {
 
     let address = ("127.0.0.1", 8080);
 
-    HttpServer::new(|| {
+    let pool = db::get_pool().await;
+
+    log::info!("Starting server...");
+
+    HttpServer::new(move || {
         App::new()
+            .app_data(web::Data::new(pool.clone()))
             .wrap(Logger::default())
             .configure(routes::configure)
     })

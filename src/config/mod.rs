@@ -1,11 +1,11 @@
-use std::io::Error;
-
 pub struct Config {
     database_url: String,
 }
 
 impl Config {
     pub fn new() -> Self {
+        log::info!("Loading environment variables...");
+
         let database_url = match std::env::var("DATABASE_URL") {
             Ok(url) => url,
             Err(err) => {
@@ -13,6 +13,8 @@ impl Config {
                 std::process::exit(1)
             }
         };
+
+        log::info!("Successfully loaded environment variables");
 
         Config { database_url }
     }
