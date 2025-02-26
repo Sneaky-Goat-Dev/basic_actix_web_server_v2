@@ -10,7 +10,7 @@ impl Config {
             Ok(url) => url,
             Err(err) => {
                 log::error!("Failed to load DATABASE_URL from env: {:#?}", err);
-                panic!("Failed to load DATABASE_URL from env: {:#?}", err)
+                std::process::exit(1)
             }
         };
 
