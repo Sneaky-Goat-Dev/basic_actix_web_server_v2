@@ -3,6 +3,7 @@ use std::io::Error;
 use actix_web::{middleware::Logger, App, HttpServer};
 use dotenv::dotenv;
 
+mod config;
 mod handlers;
 mod routes;
 
