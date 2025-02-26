@@ -6,6 +6,7 @@ use dotenv::dotenv;
 mod config;
 mod db;
 mod handlers;
+mod models;
 mod routes;
 
 pub async fn run() -> Result<(), Error> {
