@@ -8,6 +8,7 @@ mod db;
 mod handlers;
 mod models;
 mod routes;
+mod utils;
 
 pub async fn run() -> Result<(), Error> {
     dotenv().ok();
